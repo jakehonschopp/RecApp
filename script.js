@@ -48,19 +48,26 @@ const createMeal = (meal) => {
   `;
   
   meal_container.innerHTML = newInnerHTML;
-}
+};
 
-function fetchRandomRecipe() {
+
+function fillEmptyMeals() {
   fetch('https://www.themealdb.com/api/json/v1/1/random.php')
     .then(res => res.json())
     .then(res => {
     createMeal(res.meals[0]);
-})  
+  });
+};    
 
 window.addEventListener("load", function() { 
-  if(localStorage === null) {
-    fetchRandomRecipe();
+  console.log(localStorage.getItem("meals") === '[]');
+  if(!localStorage.getItem("meals") || localStorage.getItem("meals") === '[]') {
+    fillEmptyMeals()
   } 
-})    
+});    
+    
+    
+ 
+
 
 
