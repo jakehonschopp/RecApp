@@ -1,7 +1,7 @@
-const get_meal_btn = document.getElementById('get_meal');
-const meal_container = document.getElementById('meal');
+const getMealBtn = document.getElementById('get_meal');
+const mealContainer = document.getElementById('meal');
 
-get_meal_btn.addEventListener('click', () => {
+getMealBtn.addEventListener('click', () => {
   fetch('https://www.themealdb.com/api/json/v1/1/random.php')
     .then(res => res.json())
     .then(res => {
@@ -16,8 +16,8 @@ const createMeal = (meal) => {
       ingredients.push(`${meal[`strIngredient${i}`]} - ${meal[`strMeasure${i}`]}`)
     } else {
       break;
-    }
-  }
+    };
+  };
   
   const newInnerHTML = `
     <div class="row">
@@ -47,9 +47,8 @@ const createMeal = (meal) => {
     </div>` : ''}
   `;
   
-  meal_container.innerHTML = newInnerHTML;
+  mealContainer.innerHTML = newInnerHTML;
 };
-
 
 function fillEmptyMeals() {
   fetch('https://www.themealdb.com/api/json/v1/1/random.php')
@@ -57,13 +56,13 @@ function fillEmptyMeals() {
     .then(res => {
     createMeal(res.meals[0]);
   });
-};    
+};      
 
 window.addEventListener("load", function() { 
   console.log(localStorage.getItem("meals") === '[]');
   if(!localStorage.getItem("meals") || localStorage.getItem("meals") === '[]') {
     fillEmptyMeals()
-  } 
+  };  
 });    
     
     
